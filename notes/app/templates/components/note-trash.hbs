@@ -1,0 +1,23 @@
+<div class="note">
+  <div>
+    <div class="note__heading">{{note.title}}</div>
+  </div>
+  <div class="note__mainnote">
+    {{note.text}}
+  </div>
+  <div class="note__options">
+    <img
+      src="/img/delete notes/permanet delete.svg"
+      alt="permanent delete"
+      class="note__options__img start"
+      {{action "deleteNote"}}
+    >
+    <img
+      src="/img/delete notes/reestore.svg"
+      alt="restore"
+      class="note__options__img"
+      {{action "restoreNote"}}
+    >
+  </div>
+</div>
+{{yield}}

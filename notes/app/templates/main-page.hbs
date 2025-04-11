@@ -1,0 +1,72 @@
+<div class="notes">
+  <div class="notes__creatediv">
+      <div class="notes__creatediv__titlediv {{unless showheader 'hideElement'}}">
+          {{textarea placeholder="Title"
+            class="notes__creatediv__content__enter notes__creatediv__titlediv__decrheight"
+            value=newNote_title}}
+          <div class="notes__creatediv__titlediv__pinContainer header--divCircle" {{action "headerPinUnpin"}}>
+              <img src={{newNote_pinImageSrc}}  alt={{newNote_pinImageAlt}}  class="notes__creatediv__titlediv__pinContainer__img">
+          </div>
+      </div>
+      <div class="notes__creatediv__content ">
+          {{textarea
+              placeholder="Take a note..."
+              class="notes__creatediv__content__enter"
+              value=newNote_content
+              focus-in=(action "expandTitle")
+            }}
+      </div>
+      <div class="notes__creatediv__createOptionscon {{unless showheader 'hideElement'}}">
+          <div class="notes__creatediv__createOptionscon__options">
+
+          </div>
+          <div class="notes__creatediv__createOptionscon__closecon" {{action "clearNotes"}}>
+              Close
+          </div>
+          <div class="notes__creatediv__createOptionscon__savecon" {{action "saveNote"}}>
+              Save
+          </div>
+      </div>
+  </div>
+  <div class="notes__pin {{unless pinnedNotes.length 'hideElement'}}">
+      <div class="notes__pin__text">PINNED</div>
+      <div class="notes__pin__noteCon">
+        {{#if search.query}}
+          {{#if filterPinnedNotes.length}}
+            {{#each filterPinnedNotes as |note|}}
+              {{note-element note=note changePin=(action "changePin") archiveNote=(action "archiveNote")}}
+            {{/each}}
+          {{else}}
+            <p>NO match in pinned section</p>
+          {{/if}}
+        {{else}}
+          {{#each pinnedNotes as |note|}}
+            {{note-element note=note changePin=(action "changePin") archiveNote=(action "archiveNote") reorderNotes=(action "reorderNotes")}}
+          {{/each}}
+        {{/if}}
+      </div>
+  </div>
+  <div class="notes__unpin">
+      <div class="notes__unpin__text" onclick="showToast()">OTHERS</div>
+      <div class="notes__unpin__noteCon">
+        {{#if search.query}}
+          {{#if filterUnpinnedNotes.length}}
+            {{#each filterUnpinnedNotes as |note|}}
+              {{note-element note=note changePin=(action "changePin") archiveNote=(action "archiveNote")}}
+            {{/each}}
+          {{else}}
+            <p>No match in unpinned section</p>
+          {{/if}}
+        {{else}}
+          {{#if unpinnedNotes.length}}
+            {{#each unpinnedNotes as |note|}}
+              {{note-element note=note changePin=(action "changePin") archiveNote=(action "archiveNote") reorderNotes=(action "reorderNotes")}}
+            {{/each}}
+          {{else}}
+            <p>No notes available. Please create a note.</p>
+          {{/if}}
+        {{/if}}
+      </div>
+  </div>
+  {{outlet}}
+</div>
