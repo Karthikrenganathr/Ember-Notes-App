@@ -1,0 +1,23 @@
+<div class="notes__archive">
+    <div class="notes__archive__text">ARCHIVE</div>
+    <div class="notes__archive__noteCon">
+      {{#if search.query}}
+        {{#if filterTrashNote.length}}
+          {{#each filterTrashNote as |note|}}
+            {{note-trash note=note restoreNote=(action "restoreNote") deleteNote=(action "deleteNote")}}
+          {{/each}}
+        {{else}}
+          <p>No match in trash notes.</p>
+        {{/if}}
+      {{else}}
+        {{#if trashNotes.length}}
+          {{#each trashNotes as |note|}}
+            {{note-trash note=note restoreNote=(action "restoreNote") deleteNote=(action "deleteNote")}}
+          {{/each}}
+        {{else}}
+          <p>No notes available in trash</p>
+        {{/if}}
+      {{/if}}
+    </div>
+</div>
+{{outlet}}

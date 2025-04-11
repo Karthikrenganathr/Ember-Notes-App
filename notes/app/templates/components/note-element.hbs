@@ -1,0 +1,32 @@
+<div class="note">
+  <div>
+    <div class="note__heading">{{note.title}}</div>
+    <div class="note__imgcontainer">
+      <img 
+        src={{if note.isPinned "/img/note/unpin.svg" "/img/note/pin.svg"}} 
+        alt={{if note.isPinned "pin image" "unpin image"}} 
+        class="note__imgcontainer__img" 
+        {{action "togglePin"}}
+      >
+    </div>
+  </div>
+
+  <div class="note__mainnote" {{action "openNote"}}>
+    {{note.text}}
+  </div>
+  <div class="note__options">
+    <img src="/img/note/notification.svg" alt="alert image" class="note__options__img start">
+    <img src="/img/note/contact.svg" alt="alert image" class="note__options__img">
+    <img src="/img/note/themes.svg" alt="alert image" class="note__options__img">
+    <img src="/img/note/photo.svg" alt="alert image" class="note__options__img">
+    <img 
+      src="/img/note/archive.svg" 
+      alt="delete note" 
+      class="note__options__img" 
+      {{action "archiveNote"}}
+    >
+    <img src="/img/note/more.svg" alt="alert image" class="note__options__img">
+  </div>
+</div>
+
+{{yield}}

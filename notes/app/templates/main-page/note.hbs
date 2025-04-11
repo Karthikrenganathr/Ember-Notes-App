@@ -1,0 +1,30 @@
+<div class="enlarged">
+  <div class="enlarged__note">
+    <div class="enlarged__note__top">
+      {{input
+        value=this.title
+        class="enlarged__note__heading"
+        placeholder="Enter title"
+      }}
+
+      <div class="enlarged__note__imgcontainer">
+        <img
+          src={{if this.isPinned "/img/note/unpin.svg" "/img/notes/pin.svg"}}
+          alt="pin image"
+          class="enlarged__note__imgcontainer__img"
+          {{action "togglePin"}}
+        >
+      </div>
+    </div>
+
+    {{textarea
+      value=this.text
+      class="enlarged__note__mainnote"
+      placeholder="Write your note..."
+    }}
+
+    <div class="enlarged__note__options__close" {{action "saveAndClose"}}>
+      close
+    </div>
+  </div>
+</div>
